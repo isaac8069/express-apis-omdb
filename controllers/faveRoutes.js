@@ -37,6 +37,19 @@ router.post('/addFave', (req, res) => {
 
 
 // we're going to add a delete, that will allow us to remove a fave
+router.delete('/:id', (req, res)=>{
+    // console.log('this is the id\n', req.params.id)
+    db.favorite.destroy({
+        where: {id: req.params.id}
+    })
+    .then(deletedItem =>{
+        console.log('you deleted: ', deletedItem)
+        res.redirect('/faves')
+    })
+    .catch(error =>{
+        console.error
+    })
+})
 
 // a show route for an individual fave
 // if youre using a request parameter (:id in this case) make sure your more specific urls are above the one using the parameter.
