@@ -23,31 +23,33 @@ app.get('/', function(req, res) {
   // res.render serves up or ejs, NEAT!
   res.render('index')
 })
+/////// WE MOVED THIS TO omdbRoutes CONTROLLER FILLE ////////
+// // this is our results route aka controller
+// app.get('/results', function(req, res){
+//   // we used this console.log to check out our request object
+//   // console.log('this is req.query', req.query)
+//   let movieTitle = req.query.movieTitle
+//   console.log('this should be the movie title', movieTitle)
+//   // now we can use the movieTitle, to build the request url, and make the call with axios
+//   axios.get(`http://www.omdbapi.com/?t=${movieTitle}&apikey=${process.env.OMDB_API_KEY}`)
+//   .then(apiRes =>{
+//     console.log('this is apiRes.data', apiRes.data)
+//     let title = apiRes.data.Title
+//     let year = apiRes.data.Year
+//     let plot = apiRes.data.Plot
+//     let imdbID = apiRes.data.imdbID
+//     let poster = apiRes.data.Poster
 
-// this is our results route aka controller
-app.get('/results', function(req, res){
-  // we used this console.log to check out our request object
-  // console.log('this is req.query', req.query)
-  let movieTitle = req.query.movieTitle
-  console.log('this should be the movie title', movieTitle)
-  // now we can use the movieTitle, to build the request url, and make the call with axios
-  axios.get(`http://www.omdbapi.com/?t=${movieTitle}&apikey=${process.env.OMDB_API_KEY}`)
-  .then(apiRes =>{
-    console.log('this is apiRes.data', apiRes.data)
-    let title = apiRes.data.Title
-    let year = apiRes.data.Year
-    let plot = apiRes.data.Plot
-    let imdbID = apiRes.data.imdbID
-    let poster = apiRes.data.Poster
+//     // res.render results to results.ejs with our selected data sent as an object
+//     res.render('results', {title: title, year: year, plot: plot, imdbID: imdbID, poster: poster})
+//   })
+//   .catch(err =>{
+//     console.log(err)
+//   })
+// })
+///////// MOVED /////////////
 
-    // res.render results to results.ejs with our selected data sent as an object
-    res.render('results', {title: title, year: year, plot: plot, imdbID: imdbID, poster: poster})
-  })
-  .catch(err =>{
-    console.log(err)
-  })
-})
-
+app.use('/movies', require('./controllers/omdbRoutes.js'))
 
 app.listen(process.env.PORT || 3000, ()=>{
   console.log(`We are listening to the sweet sonds of ${process.env.PORT} Time to make some requests.`)
