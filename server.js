@@ -55,9 +55,3 @@ app.use('/faves', require('./controllers/faveRoutes'))
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Listening to the sweet sounds of ${process.env.PORT} Time to make some requests.`)
 })
-
-// // The app.listen function returns a server handle
-// var server = app.listen(process.env.PORT || 3000);
-
-// // We can export this server to other servers like this
-// module.exports = server;
